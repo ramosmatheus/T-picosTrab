@@ -1,0 +1,82 @@
+{% extends 'adocao/base.html' %}
+
+{% load static %}
+
+<!-- Deixa o bloco vazio -->
+{% block header %}
+
+{% endblock %}
+
+<!-- Bloco Principal -->
+{% block conteudo %}
+
+<div class="container py-5">
+
+    <div class="row mt-5">
+        <div class="col-lg">
+
+            <h3 class="border-bottom">
+                Lista de veiculos cadastrados
+
+                <a href="{% url 'cadastrar-veiculo' %}" class="float-right btn btn-primary btn-sm">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Novo Veiculo
+                </a>
+            </h3>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg mt-4">
+
+            <table class="table table-striped">
+
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Ano</th>
+                        <th>Quilometragem</th>
+                        <th>Placa</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for obj in object_list %}
+                    <tr>
+                        <td>{{ obj.categoria }}</td>
+                        <td>{{ obj.marca }}</td>
+                        <td>{{ obj.modelo }}</td>
+                        <td>{{ obj.ano }}</td>
+                        <td>{{ obj.quilometragem }}</td>
+                        <td>{{ obj.placa }}</td>
+                        <td>
+                            <a href="{% url 'alterar-veiculo' obj.pk %}" class="btn btn-outline-warning btn-sm">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </a>
+
+                            <a href="{% url 'delete-veiculo' obj.pk %}" class="btn btn-outline-danger btn-sm">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="100%">Nenhuma veiculo cadastrado</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

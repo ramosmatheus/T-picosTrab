@@ -1,0 +1,99 @@
+<!-- Vamos extender o template base -->
+{% extends 'adocao/base.html' %}
+
+<!-- Carrega o static para usar aqui também -->
+{% load static %}
+
+{% block header %}
+<!-- repete o código do bloco pai -->
+{{ block.super }}
+
+{% endblock %}
+
+<!-- Vamos reescrever esse bloco -->
+{% block container %}
+
+<div class="container bg-light">
+
+  <!-- <div class="row">
+    <div class="col-lg mt-5 px-5">
+
+      {% if request.user.is_authenticated %}
+
+      <h3>Olá {{ request.user.username }}, bem vindo ao sistema!</h3>
+
+      <h5>Seu último login foi em: {{ request.user.last_login }}</h5>
+
+      {% else %}
+
+      <h3>Olá visitante, faça login para poder acessar todas as funcionalidades.</h3>
+
+      {% endif %}
+
+    </div>
+  </div> -->
+
+  <div class="row mt-3">
+    <div class="col-lg p-5">
+      {% if ultimos_animais %}
+      <h3 class="text-center border-bottom text-dark pb-3">Últimos animais cadastrados</h2>
+      
+      <div class="float-left m-2 p-3 animais-list">
+        <img width="150" height="150" src="https://abrilsuperinteressante.files.wordpress.com/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png" alt="">
+        <div class="animal-desc">
+          Descrição do animal
+        </div>
+        <span>Raça</span>
+      </div>
+      
+      <div class="animais">
+
+        
+        <div class="float-left m-2 p-3 animais-list">
+          <img width="150" height="150" src="https://abrilsuperinteressante.files.wordpress.com/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png" alt="">
+          <div class="animal-desc">
+            Descrição do animal
+          </div>
+          <span>Raça</span>
+        </div>
+        
+        
+        <div class="float-left m-2 p-3 animais-list">
+          <img width="150" height="150" src="https://abrilsuperinteressante.files.wordpress.com/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png" alt="">
+          <div class="animal-desc">
+            Descrição do animal
+          </div>
+          <span>Raça</span>
+        </div>
+        
+        
+        <div class="float-left m-2 p-3 animais-list">
+          <img width="150" height="150" src="https://abrilsuperinteressante.files.wordpress.com/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png" alt="">
+          <div class="animal-desc">
+            Descrição do animal
+          </div>
+          <span>Raça</span>
+        </div>
+        
+        <div class="float-left m-2 p-3 animais-list">
+          <img width="150" height="150" src="https://abrilsuperinteressante.files.wordpress.com/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png" alt="">
+          <div class="animal-desc">
+            Descrição do animal
+          </div>
+          <span>Raça</span>
+        </div>
+        
+        <div class="clear"></div>
+        
+      </div>
+        
+        {% endif %}
+      </div>
+  </div>
+
+  
+</div>
+
+<br><br>
+
+{% endblock %}

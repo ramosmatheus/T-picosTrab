@@ -1,0 +1,46 @@
+body {
+
+}
+
+#fundo {
+  background-color: white;
+}
+
+#nome {
+  font-size: 50pt;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0px 0px 0px 40px
+}
+
+#cab {
+  color: rgb(115, 13, 211);
+}
+
+i {
+  color: white;
+  size: 100px;
+}
+
+#icone {
+  background-color: rgb(115, 13, 211);
+  width: 40px;
+  height: 40px;
+  padding: 7px;
+}
+
+p {
+  text-align: justify;
+}
+
+span {
+  font-weight: bold;
+  color: rgb(115, 13, 211);
+}
+
+#texto {
+  font-size: 15px;
+}
+.alinhamento{
+  padding-right:10%;
+  padding-left: 10%;
+}

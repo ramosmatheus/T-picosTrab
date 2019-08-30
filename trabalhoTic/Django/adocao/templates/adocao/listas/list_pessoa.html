@@ -1,0 +1,78 @@
+{% extends 'adocao/base.html' %}
+
+{% load static %}
+
+<!-- Deixa o bloco vazio -->
+{% block header %}
+
+{% endblock %}
+
+<!-- Bloco Principal -->
+{% block conteudo %}
+
+<div class="container py-5">
+
+    <div class="row mt-5">
+        <div class="col-lg">
+
+            <h3 class="border-bottom">
+                Lista de Pessoas cadastrados
+
+                <a href="{% url 'cadastrar-pessoa' %}" class="float-right btn btn-primary btn-sm">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Cadastrar Pessoa
+                </a>
+            </h3>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg mt-4">
+
+            <table class="table table-striped">
+
+                <thead>
+                    <tr>
+                        <th>nome</th>
+                        <th>cargo</th>
+                        <th>email</th>
+                        <th>telefone</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for obj in object_list %}
+                    <tr>
+                        <td>{{ obj.nome }}</td>
+                        <td>{{ obj.cargo }}</td>
+                        <td>{{ obj.email }}</td>
+                        <td>{{ obj.telefone }}</td>
+                        <td>
+                            <a href="{% url 'alterar-pessoa' obj.pk %}" class="btn btn-outline-warning btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+
+                            <a href="{% url 'delete-pessoa' obj.pk %}" class="btn btn-outline-danger btn-sm">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="100%">Nenhum animal cadastrado</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
