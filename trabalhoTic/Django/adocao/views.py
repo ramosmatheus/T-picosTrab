@@ -11,6 +11,8 @@ from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 # Importa o Mixin para obrigar login
 from django.contrib.auth.mixins import LoginRequiredMixin
+# Método que busca um objeto. Se não existir, da um erro 404
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -36,6 +38,7 @@ class SobreView(TemplateView):
     template_name = "adocao/sobre.html"
 
 # Página de contato
+
 
 class CurriculumView(TemplateView):
     template_name = "adocao/curriculum.html"
@@ -106,6 +109,14 @@ class VeiculoCreate(LoginRequiredMixin, CreateView):
         context['classeBotao'] = "btn-primary"
 
         return context
+
+    def form_valid(self, form):
+        # Define o usuário como usuário logado
+        form.instance.usuario = self.request.user
+
+        url = super().form_valid(form)
+
+        return url
 
 
 class PassagemCreate(LoginRequiredMixin, CreateView):
@@ -221,6 +232,11 @@ class VeiculoCreateUpdate(LoginRequiredMixin, UpdateView):
 
         return context
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Veiculo, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
+
+
 
 class PassagemCreateUpdate(LoginRequiredMixin, UpdateView):
     model = PassagemAviao
@@ -277,25 +293,36 @@ class PessoaList(LoginRequiredMixin, ListView):
     model = Pessoa
     template_name = "adocao/listas/list_pessoa.html"
 
+
 class SetorList(LoginRequiredMixin, ListView):
     model = Setor
     template_name = "adocao/listas/list_setor.html"
+
 
 class ViagemList(LoginRequiredMixin, ListView):
     model = Viajem
     template_name = "adocao/listas/list_viajem.html"
 
+
 class VeiculoList(LoginRequiredMixin, ListView):
     model = Veiculo
     template_name = "adocao/listas/list_veiculo.html"
+    def get_queryset(self):
+        # O object_list armazena uma lista de objetos de um ListView
+        self.object_list = Veiculo.objects.filter(usuario=self.request.user)
+        return self.object_list
+
+
 
 class PassagemList(LoginRequiredMixin, ListView):
     model = PassagemAviao
     template_name = "adocao/listas/list_passagem.html"
 
+
 class ServidorList(LoginRequiredMixin, ListView):
     model = Servidor
     template_name = "adocao/listas/list_servidor.html"
+
 
 class MotoristaList(LoginRequiredMixin, ListView):
     model = Motorista
@@ -316,6 +343,7 @@ class PessoaDelete(LoginRequiredMixin, DeleteView):
         context['classeBotao'] = "btn-danger"
         return context
 
+
 class SetorDelete(LoginRequiredMixin, DeleteView):
     model = Setor
     template_name = "adocao/formulario.html"
@@ -327,6 +355,7 @@ class SetorDelete(LoginRequiredMixin, DeleteView):
         context['botao'] = "Excluir"
         context['classeBotao'] = "btn-danger"
         return context
+
 
 class ViajemDelete(LoginRequiredMixin, DeleteView):
     model = Viajem
@@ -340,6 +369,7 @@ class ViajemDelete(LoginRequiredMixin, DeleteView):
         context['classeBotao'] = "btn-danger"
         return context
 
+
 class VeiculoDelete(LoginRequiredMixin, DeleteView):
     model = Veiculo
     template_name = "adocao/formulario.html"
@@ -351,6 +381,12 @@ class VeiculoDelete(LoginRequiredMixin, DeleteView):
         context['botao'] = "Excluir"
         context['classeBotao'] = "btn-danger"
         return context
+    
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Veiculo, pk=self.kwargs['pk'], usuario=self.request.user)
+        return self.object
+
+
 
 class PassagemDelete(LoginRequiredMixin, DeleteView):
     model = PassagemAviao
@@ -364,6 +400,7 @@ class PassagemDelete(LoginRequiredMixin, DeleteView):
         context['classeBotao'] = "btn-danger"
         return context
 
+
 class ServidorDelete(LoginRequiredMixin, DeleteView):
     model = Servidor
     template_name = "adocao/formulario.html"
@@ -376,13 +413,15 @@ class ServidorDelete(LoginRequiredMixin, DeleteView):
         context['classeBotao'] = "btn-danger"
         return context
 
+
 class MotoristaDelete(LoginRequiredMixin, DeleteView):
     model = Motorista
     template_name = "adocao/formulario.html"
     success_url = reverse_lazy("listar-motorista")
 
     def get_context_data(self, *args, **kwargs):
-        context = super(MotoristaDelete, self).get_context_data(*args, **kwargs)
+        context = super(MotoristaDelete, self).get_context_data(
+            *args, **kwargs)
         context['titulo'] = "Deseja excluir esse registro?"
         context['botao'] = "Excluir"
         context['classeBotao'] = "btn-danger"

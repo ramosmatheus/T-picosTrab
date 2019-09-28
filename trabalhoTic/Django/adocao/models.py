@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Pessoa(models.Model):
 
@@ -46,6 +46,7 @@ class Veiculo(models.Model):
     ano = models.CharField(max_length=100)
     quilometragem = models.CharField(max_length=100)
     placa = models.CharField(max_length=8)
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.categoria + ' - ' + self.marca
