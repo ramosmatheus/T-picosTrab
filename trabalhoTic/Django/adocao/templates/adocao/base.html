@@ -48,7 +48,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" href="{% url 'cadastrar-pessoa' %}">Pessoa</a>
           <a class="dropdown-item" href="{% url 'cadastrar-setor' %}">Setor</a>
-          <a class="dropdown-item" href="{% url 'cadastrar-viajem' %}">Viajem</a>
+          <a class="dropdown-item" href="{% url 'cadastrar-viajem' %}">Viagem</a>
           <a class="dropdown-item" href="{% url 'cadastrar-veiculo' %}">veiculo</a>
           <a class="dropdown-item" href="{% url 'cadastrar-passagem' %}">passagem</a>
           <a class="dropdown-item" href="{% url 'cadastrar-servidor' %}">servidor</a>
@@ -56,6 +56,22 @@
         </div>
       </div>
     </div>
+    <div class="dropdown">
+      <a class="btn btn-secondary dropdown-toggle btncolor" href="#" role="button" id="dropdownMenuLink"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Listas
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="{% url 'listar-pessoa' %}">Pessoas</a>
+        <a class="dropdown-item" href="{% url 'listar-setor' %}">Setores</a>
+        <a class="dropdown-item" href="{% url 'listar-viajem' %}">Viagens</a>
+        <a class="dropdown-item" href="{% url 'listar-veiculo' %}">Veículos</a>
+        <a class="dropdown-item" href="{% url 'listar-passagem' %}">Passagens</a>
+        <a class="dropdown-item" href="{% url 'listar-servidor' %}">Servidores</a>
+        <a class="dropdown-item" href="{% url 'listar-motorista' %}">Motoristas</a>
+      </div>
+    </div>
+  </div>
     <ul class="navbar-nav ml-auto">
       {% if request.user.is_authenticated %}
       <li class="nav-item dropdown">
@@ -237,7 +253,6 @@
   {% block scripts %}
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <!-- Custom scripts for this template -->
