@@ -14,6 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Método que busca um objeto. Se não existir, da um erro 404
 from django.shortcuts import get_object_or_404
 
+from braces.views import GroupRequiredMixin
+
 
 # Create your views here.
 
@@ -50,11 +52,12 @@ class ContatoView(TemplateView):
 
 ##################### INSERIR ######################
 
-class PessoaCreate(LoginRequiredMixin, CreateView):
+class PessoaCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
     model = Pessoa
     template_name = "adocao/formulario.html"
     success_url = reverse_lazy("listar-pessoa")
     fields = ['nome', 'cargo', 'email', 'telefone', 'tipoUsuario']
+    group_required = [u"Administrador"] 
 
     def get_context_data(self, *args, **kwargs):
         context = super(PessoaCreate, self).get_context_data(*args, **kwargs)
@@ -65,11 +68,12 @@ class PessoaCreate(LoginRequiredMixin, CreateView):
         return context
 
 
-class SetorCreate(LoginRequiredMixin, CreateView):
+class SetorCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
     model = Setor
     template_name = "adocao/formulario.html"
     success_url = reverse_lazy("listar-setor")
     fields = ['nome', 'diretor']
+    group_required = [u"Administrador"]
 
     def get_context_data(self, *args, **kwargs):
         context = super(SetorCreate, self).get_context_data(*args, **kwargs)
@@ -86,6 +90,7 @@ class ViajemCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("listar-viajem")
     fields = ['solicitante', 'nomePassageiros', 'quantidadePassageiros',
               'finalidade', 'roteiro', 'dataPartida', 'dataRetorno']
+    group_required = [u"Administrador"]
 
     def get_context_data(self, *args, **kwargs):
         context = super(ViajemCreate, self).get_context_data(*args, **kwargs)
@@ -96,11 +101,12 @@ class ViajemCreate(LoginRequiredMixin, CreateView):
         return context
 
 
-class VeiculoCreate(LoginRequiredMixin, CreateView):
+class VeiculoCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
     model = Veiculo
     template_name = "adocao/formulario.html"
     success_url = reverse_lazy("listar-veiculo")
     fields = ['categoria', 'marca', 'modelo', 'ano', 'quilometragem', 'placa']
+    group_required = [u"Administrador"]
 
     def get_context_data(self, *args, **kwargs):
         context = super(VeiculoCreate, self).get_context_data(*args, **kwargs)
@@ -119,12 +125,13 @@ class VeiculoCreate(LoginRequiredMixin, CreateView):
         return url
 
 
-class PassagemCreate(LoginRequiredMixin, CreateView):
+class PassagemCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
     model = PassagemAviao
     template_name = "adocao/formulario.html"
     success_url = reverse_lazy("listar-passagem")
     fields = ['companhiaAereaPartida', 'numVooPartida',
               'companhiaAereaChegada', 'numVooChegada', 'horaPartida', 'horaChegada']
+    group_required = [u"Administrador"]
 
     def get_context_data(self, *args, **kwargs):
         context = super(PassagemCreate, self).get_context_data(*args, **kwargs)
@@ -135,11 +142,12 @@ class PassagemCreate(LoginRequiredMixin, CreateView):
         return context
 
 
-class ServidorCreate(LoginRequiredMixin, CreateView):
+class ServidorCreate(GroupRequiredMixin,LoginRequiredMixin, CreateView):
     model = Servidor
     template_name = "adocao/formulario.html"
     success_url = reverse_lazy("listar-servidor")
     fields = ['Siape']
+    group_required = [u"Administrador"]
 
     def get_context_data(self, *args, **kwargs):
         context = super(ServidorCreate, self).get_context_data(*args, **kwargs)
@@ -150,11 +158,12 @@ class ServidorCreate(LoginRequiredMixin, CreateView):
         return context
 
 
-class MotoristaCreate(LoginRequiredMixin, CreateView):
+class MotoristaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Motorista
     template_name = "adocao/formulario.html"
     success_url = reverse_lazy("listar-motorista")
     fields = ['cnh', 'validade']
+    group_required = [u"Administrador"]
 
     def get_context_data(self, *args, **kwargs):
         context = super(MotoristaCreate, self).get_context_data(
