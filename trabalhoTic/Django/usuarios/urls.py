@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
+from .views import UsuarioCreate
 
 urlpatterns = [
     # Aqui vão suas urls
@@ -25,6 +26,6 @@ urlpatterns = [
         success_url=reverse_lazy('index')
     ), name="alterar-senha"),
 
-
+    path('cadastrar-usuario/', UsuarioCreate.as_view(), name="cadastrar-usuario"),
 
 ]

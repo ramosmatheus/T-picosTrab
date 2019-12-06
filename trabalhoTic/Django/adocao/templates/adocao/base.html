@@ -40,7 +40,7 @@
         Menu
         <i class="fas fa-bars"></i>
       </button>
-      <div class="dropdown">
+      <!-- <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle btncolor" href="#" role="button" id="dropdownMenuLink"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Cadastros
@@ -54,7 +54,7 @@
           <a class="dropdown-item" href="{% url 'cadastrar-servidor' %}">servidor</a>
           <a class="dropdown-item" href="{% url 'cadastrar-motorista' %}">motorista</a>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="dropdown">
       <a class="btn btn-secondary dropdown-toggle btncolor" href="#" role="button" id="dropdownMenuLink"
@@ -92,6 +92,12 @@
         <a class="nav-link" href="{% url 'login' %}">
           <i class="fa fa-sign-in" aria-hidden="true"></i>
           Entrar
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cadastrar-usuario' %}">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+          Cadastre-se
         </a>
       </li>
       {% endif %}

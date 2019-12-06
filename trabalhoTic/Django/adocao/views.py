@@ -181,7 +181,7 @@ class PessoaCreateUpdate(LoginRequiredMixin, UpdateView):
     model = Pessoa
     template_name = "adocao/formulario.html"
     success_url = reverse_lazy("listar-pessoa")
-    fields = ['nome', 'cargo', 'email', 'senha', 'telefone', 'tipoUsuario']
+    fields = ['nome', 'cargo', 'email', 'telefone', 'tipoUsuario']
 
     def get_context_data(self, *args, **kwargs):
         context = super(PessoaCreateUpdate, self).get_context_data(

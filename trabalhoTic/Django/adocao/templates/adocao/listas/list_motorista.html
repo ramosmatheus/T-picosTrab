@@ -18,6 +18,7 @@
             <h3 class="border-bottom">
                 Lista de motoristas cadastrados
 
+                {% if reques.user.is_authenticated %}
                 <a href="{% url 'cadastrar-motorista' %}" class="float-right btn btn-primary btn-sm">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                     Novo Motorista
